@@ -7,19 +7,7 @@ typedef struct node
     struct node *next;
 } node;
 
-struct node *start=NULL;
 
-void print()
-{
-    struct node *ptr=start;
-    while(ptr!=NULL)
-    {
-        printf("%d",ptr->data);
-        ptr=ptr->next;
-    }
-    printf("\n");
-    return print;
-}
 
 int main()
 {

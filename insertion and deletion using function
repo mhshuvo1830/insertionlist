@@ -1,0 +1,149 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+} node;
+
+node *head=NULL;
+
+void print()
+{
+    node*p=head;
+    if(p==NULL)
+    {
+        printf("list is empty");
+    }
+    while(p!=NULL)
+    {
+        printf("DATA : %d \n",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+void count()
+{
+    int count=0;
+    node *p=head;
+    while(p!=NULL)
+    {
+        count++;
+        p=p->next;
+    }
+    printf("number of node : %d\n",count);
+    printf("\n");
+
+}
+void insert_begin()
+{
+    int k;
+    printf("please enter value :\n");
+    scanf("%d",&k);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=k;
+    newNode->next=NULL;
+    head=newNode;
+
+}
+void insert_end()
+{
+    int k;
+    printf("enter your value :\n");
+    scanf("%d",&k);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=k;
+    newNode->next=NULL;
+
+    node *p=head;
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    p->next=newNode;
+
+}
+
+void insert_at_k()
+{
+    int k;
+    printf("enter your value :\n");
+    scanf("%d",&k);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=k;
+    newNode->next=NULL;
+    node *p=head;
+
+    int m;
+    printf("enter your position:\n");
+    scanf("%d",&m);
+    for(int i=2; i<m; i++)
+    {
+        if(p->next=NULL)
+        {
+            p=p->next;
+        }
+        newNode->next=p->next;
+        p->next=newNode;
+    }
+
+}
+
+void deletion_at_beg()
+{
+    node *temp=head;
+    head=head->next;
+    free(temp);
+}
+void deletion_at_end()
+{
+    node *p=head;
+    while(p->next->next!=NULL)
+    {
+        p=p->next;
+    }
+    p->next=NULL;
+    printf("\n");
+}
+void deletion_at_k()
+{
+    int k;
+    printf("enter you deletion position :\n");
+    scanf("%d",&k);
+    node *p=head;
+    for(int i=2; i<k; i++);
+    {
+        if(p->next!=NULL)
+        {
+            p=p->next;
+        }
+        node *temp=p->next;
+        p->next=p->next->next;
+        free(temp);
+
+    }
+}
+
+
+int main()
+{
+    insert_begin();
+    print();
+    insert_end();
+    print();
+    insert_end();
+    print();
+    insert_end();
+    print();
+    count();
+    deletion_at_beg();
+    printf("after deletion :\n");
+    print();
+    count();
+    deletion_at_k();
+    printf("after deletion :\n");
+    print();
+    count();
+    return 0;
+}

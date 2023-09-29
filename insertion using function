@@ -1,0 +1,96 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+
+} node;
+
+node *start=NULL;
+void print()
+
+{
+    node *p=start;
+    if(p==NULL)
+    {
+        printf("the list is empty");
+    }
+
+    while(p!=NULL)
+    {
+        printf("DATA : %d\n",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+void insertion_begening()
+{
+    int m;
+    printf("enter your data:\n");
+    scanf("%d",&m);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->next=start;
+    start=newNode;
+
+
+}
+void insertion_at_end()
+{
+    int m;
+    printf("enter your data :\n");
+    scanf("%d",&m);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->next=NULL;
+
+    node *p=start;
+    while(p->next!=NULL)
+    {
+        p=p->next;
+
+    }
+
+    p->next=newNode;
+}
+
+void insertion_at_k()
+{
+    int m;
+    printf("enter your data\n");
+    scanf("%d",&m);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->next=NULL;
+    node *p=start;
+    int k;
+    printf("enter your position:\n");
+    scanf("%d",&k);
+    for(int i=2; i<k; i++)
+    {
+        if(p->next!=NULL)
+        {
+            p=p->next;
+        }
+        newNode->next=p->next;
+        p->next=newNode;
+    }
+
+}
+
+int main()
+{
+    print();
+    insertion_begening();
+    printf("after insertion at begening:\n");
+    print();
+    insertion_at_end();
+    printf("after insertion at end :\n");
+    print();
+    insertion_at_k();
+    printf("after insertion at position :\n");
+    print();
+    return 0;
+}

@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+} node;
+
+node *head=NULL;
+
+void print()
+{
+    node*p=head;
+    if(p==NULL)
+    {
+        printf("list is empty");
+    }
+    while(p!=NULL)
+    {
+        printf("DATA : %d \n",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+void count()
+{
+    int count=0;
+    node *p=head;
+    while(p!=NULL)
+    {
+        count++;
+        p=p->next;
+    }
+    printf("number of node : %d\n",count);
+    printf("\n");
+
+}
+
+void insert_end()
+{
+    int k;
+    printf("enter your value :\n");
+    scanf("%d",&k);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=k;
+    newNode->next=NULL;
+
+    if(head==NULL)
+    {
+        head=newNode;
+    }
+    else
+    {
+        node *p=head;
+        while(p->next!=NULL)
+        {
+            p=p->next;
+        }
+        p->next=newNode;
+    }
+
+}
+    int main()
+    {
+        print();
+        insert_end();
+        print();
+        insert_end();
+        print();
+
+    }

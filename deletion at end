@@ -48,6 +48,7 @@ int main()
       {
           p=p->next;
       }
+     free(p->next);
       p->next=NULL;
       display();
       return 0;

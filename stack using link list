@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+node *top=NULL;
+void push(int data)
+{
+    node *newNode=(node *)malloc(sizeof(node));
+    newNode->data=data;
+    newNode->next=NULL;
+    if(newNode==NULL)
+    {
+        printf("stack overflow\n");
+        exit(1);
+    }
+    newNode->next=top;
+    top=newNode;
+}
+int pop()
+{
+    node *p=top;
+    if(top==NULL)
+    {
+        printf("stack underflow\n");
+        exit(1);
+    }
+    top=top->next;
+    int val=p->data;
+    free(p);
+    return val;
+
+}
+int peek()
+{
+    if(top==NULL)
+    {
+        printf("stack underflow\n");
+    }
+    return top->data;
+}
+void print()
+{
+    node *p=top;
+    if(top==NULL)
+    {
+        printf("stack underflow");
+        exit(1);
+    }
+    printf("the elements are: ");
+    while(p!=NULL)
+    {
+        printf(" %d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    int choice, data;
+     while(1)
+     {
+        printf("1.push\n");
+        printf("2.pop\n");
+        printf("3.print the top element\n");
+        printf("4.print all the element of stack\n");
+        printf("5.exit\n");
+        printf("please enter your choice : ");
+        scanf("%d",&choice);
+        printf("\n");
+
+        switch(choice)
+        {
+        case 1:
+            printf("Enter the element to be pushed : ");
+            scanf("%d",&data);
+            push(data);
+            printf("\n");
+            break;
+        case 2:
+            data=pop();
+            printf("deleted element : %d\n",data);
+            printf("\n");
+            break;
+        case 3 :
+            printf("the top most element of stack  : %d\n",peek());
+            break;
+        case 4:
+            print();
+            break;
+        case 5:
+            exit(1);
+        default :
+            printf("wrong choice\n");
+        }
+     }
+    return 0;
+}

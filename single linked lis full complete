@@ -1,0 +1,163 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+
+} node;
+node *head, *tail=NULL;
+void add(int m)
+{
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->next=NULL;
+
+    if(head==NULL)
+    {
+        head=newNode;
+        tail=newNode;
+
+    }
+    else
+    {
+        tail->next=newNode;
+        tail=newNode;
+    }
+}
+void insert_end(int m)
+{
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->next=NULL;
+    node *p=head;
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    p->next=newNode;
+
+}
+void insert_k()
+{
+     int k;
+    printf("enter your position:\n");
+    scanf("%d",&k);
+    int m;
+    printf("enter your data\n");
+    scanf("%d",&m);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->next=NULL;
+    node *p=head;
+
+
+    for(int i=2; i<k; i++)
+    {
+
+        if(p->next!=NULL)
+        {
+            p=p->next;
+        }
+        newNode->next=p->next;
+        p->next=newNode;
+    }
+
+}
+void add_start(int k)
+{
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=k;
+    newNode->next=head;
+    head=newNode;
+
+}
+void print()
+{
+    node *p=head;
+    while(p!=NULL)
+    {
+        printf(" DATA : %d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+void count()
+{
+    node *p=head;
+    int count=0;
+    while(p!=NULL)
+    {
+        count++;
+        p=p->next;
+    }
+    printf("TOTAL NUMBER OF NODES : %d ",count);
+    printf("\n");
+}
+void delete_beg()
+{
+  node *temp=head;
+    head=head->next;
+    free(temp);
+}
+void delete_end()
+{
+    node*p=head;
+    while(p->next->next!=NULL)
+    {
+        p=p->next;
+    }
+   node *temp=p->next;
+    p->next=NULL;
+    free(temp);
+}
+ void delete_k(int k)
+ {
+     node *p=head;
+     for(int i=2;i<k;i++)
+     {
+         if(p->next!=NULL)
+         {
+              p=p->next;
+         }
+         node *temp=p->next;
+         p->next=p->next->next;
+         free(temp);
+
+     }
+ }
+ int searching(int d){
+     node *p=head;
+
+     while(p!= NULL){
+        if(p->data == d){
+        return true;
+        }
+        p =  p->next;
+
+    }
+    return false;
+    printf("\n");
+}
+
+int main()
+{
+    add(12);
+    add(13);
+    insert_end(14);
+    insert_end(15);
+    insert_end(16);
+    print();
+
+     searching(12)? printf("Yes...ITEM FOUND\n") : printf("No....ITEM NOT FOUND\n");
+
+    searching(17)? printf("Yes...ITEM FOUND\n") : printf("No....ITEM NOT FOUND\n");
+
+    delete_beg(12);
+    delete_k(3);
+    delete_end(16);
+    print();
+    count();
+    return 0;
+}

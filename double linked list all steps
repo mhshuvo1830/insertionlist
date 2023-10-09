@@ -1,0 +1,147 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+
+} node;
+node *left,*right;
+void print()
+{
+    node *p=left;
+    while(p!=NULL)
+    {
+        printf(" DATA : %d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+void count()
+{
+    node *p=left;
+    int count=0;
+    while(p!=NULL)
+    {
+        count++;
+        p=p->next;
+    }
+    printf("TOTAL NUMBER OF NODES : %d ",count);
+    printf("\n");
+}
+void add_right(int m)
+{
+    node *newNode=(node *)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->prev=NULL;
+    newNode->next=NULL;
+
+    if(left==NULL && right==NULL)
+    {
+
+        left=newNode;
+        right=newNode;
+    }
+    else
+    {
+        right->next=newNode;
+        newNode->prev=right;
+        right=newNode;
+    }
+
+}
+void add_left(int m)
+{
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->prev=NULL;
+    newNode->next=NULL;
+
+    if(left==NULL && right==NULL)
+    {
+
+        left=newNode;
+        right=newNode;
+    }
+    else
+    {
+
+        newNode->next=left;
+        left->prev=newNode;
+        left=newNode;
+    }
+
+}
+void add_k()
+{
+    node *p=left;
+    int m;
+    printf("PLEASE ENTER YOUR DATA : ");
+    scanf("%d",&m);
+    node *newNode=(node*)malloc(sizeof(node));
+    newNode->data=m;
+    newNode->prev=NULL;
+    newNode->next=NULL;
+    int k;
+    printf("ENTER YOUR POSITION : ");;
+    scanf("%d",&k);
+    for(int i=2;i<k;i++)
+    {
+        p=p->next;
+    }
+    newNode->next=p->next;
+    newNode->prev=p;
+    p->next->prev=newNode;
+    p->next=newNode;
+
+}
+void delete_start()
+{
+    node *temp=left;
+    left=left->next;;
+    left->prev=NULL;
+    free(temp);
+}
+void delete_last()
+{
+    node *temp=right;
+    right=right->prev;
+    right->next=NULL;
+    free(temp);
+}
+void delete_k(int k)
+{
+    node *p=left;
+
+     for(int i=1;i<k;i++)
+     {
+
+              p=p->next;
+     }
+         node *temp=p;
+     p->next->prev=p->prev;
+     p->prev->next=p->next;
+       free(temp);
+
+}
+int main()
+{
+    add_left(11);
+    add_left(10);
+    add_right(12);
+
+    add_right(13);
+    add_left(9);
+    add_right(14);
+    print();
+    delete_start();
+    print();
+    delete_last();
+    print();
+    delete_k(4);
+    print();
+    count();
+}

@@ -1,0 +1,96 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define max 5
+int front=-1,rear=-1;
+queue_arr[max];
+int isFull()
+{
+    if(rear==max-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
+int isEmpty()
+{
+    if(front==-1 || rear==-1)
+    {
+        return 1;
+    }
+    return 0;
+}
+void enqueue(int data)
+{
+    if(isFull())
+    {
+        printf("queue OVERFLOW\n");
+        return;
+    }
+    if (front == -1 && rear == -1)
+        {
+            front=0;
+            rear=0;
+        }
+      else
+      {
+          rear=rear+1;
+      }
+    queue_arr[rear]=data;
+}
+int dequeue()
+{
+    int data;
+    if(isEmpty())
+    {
+        printf("stack underflow\n");
+        return;
+    }
+     data=queue_arr[front];
+     if (front == rear)
+        {
+            front=-1;
+            rear=-1;
+        }
+else
+    front++;
+    return data;
+}
+
+void print()
+{
+    if(front==-1 && rear==-1)
+    {
+        printf("stack underflow");
+        return;
+    }
+    for(int i=front;i<=rear;i++)
+    {
+        printf("% d ",queue_arr[i]);
+    }
+    printf("\n");
+}
+int main()
+{   int data;
+    enqueue(15);
+    enqueue(14);
+    enqueue(13);
+    enqueue(12);
+    enqueue(11);
+   print();
+   data=dequeue();
+   print();
+    data=dequeue();
+   print();
+    data=dequeue();
+   print();
+    data=dequeue();
+   print();
+    data=dequeue();
+   print();
+
+
+}
